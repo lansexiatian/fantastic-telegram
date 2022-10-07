@@ -1,0 +1,476 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+  <title>>清涟Elina</title>
+  <style type="text/css">
+    @font-face {
+      font-family: "myFont";
+      src: url(Font.woff2);
+    }
+
+    html {
+      font-family: "myFont", serif;
+    }
+
+    body {
+      margin: 10px;
+      overflow: hidden;
+      background: url(bg.png) no-repeat;
+      background-size: cover;
+      -webkit-touch-callout: none;
+      user-select: none;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      height: 12px;
+      width: 14px;
+      background: transparent;
+      z-index: 12;
+      overflow: visible;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      width: 10px;
+      background-color: #3d424b;
+      border-radius: 10px;
+      z-index: 12;
+      border: 4px solid rgba(0, 0, 0, 0);
+      background-clip: padding-box;
+      transition: background-color .32s ease-in-out;
+      margin: 4px;
+      min-height: 32px;
+      min-width: 32px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4E5157;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #202020;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none !important;
+      margin: 0;
+    }
+  </style>
+  <link href="material-components-web.min.css" rel="stylesheet">
+  <script src="material-components-web.min.js"></script>
+</head>
+
+<body marginheight="0px" marginwidth="0px">
+  <div id="top"
+    style="height:auto;position:fixed;top:0px;width:100%;background-color:rgba(255,255,255,0.8);-webkit-app-region:drag;"
+    oncontextmenu="return false;">
+    <H3 id="title" style="left:0px;padding:0px;margin:5px">清涟 让校园网更可靠</H3>
+    <div id="toolbar" style="position:fixed;top:0px;right:0px;-webkit-app-region:no-drag;">
+      <image src="settings.png" style="cursor:pointer" height="100%" onClick="openSettings()"></image>
+      <image src="minimize.png" style="cursor:pointer" height="100%" onClick="Tray()"></image>
+      <image src="close.png" style="cursor:pointer" height="100%" onClick="Shut()"></image>
+    </div>
+  </div>
+  <H4 id="tip">永久免费无广告，官方群906897891</H4>
+  <H4>当前版本:1.0.4 甜水巷花魁琴梨梨 出品</H4>
+  <br>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <select name="type" id="type" style="cursor:pointer;-webkit-tap-highlight-color: transparent!important;"
+      class="mdc-text-field__input" aria-labelledby="my-label-id">
+      <option value="default">校园网</option>
+      <option value="telecom">电信</option>
+      <option value="cmcc">移动</option>
+      <option value="unicom">联通</option>
+    </select>
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">类型</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
+  <br>
+  <br>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <input id="account" class="mdc-text-field__input" value="account" aria-labelledby="my-label-id">
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">账号</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
+  <br>
+  <br>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <input type="password" id="password" class="mdc-text-field__input" value="pass" aria-labelledby="my-label-id">
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">密码</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+  </label>
+  <br>
+  <br>
+  <label style="width: 100%;padding-inline: 10px;" class="mdc-text-field mdc-text-field--outlined"
+    data-mdc-auto-init="MDCTextField">
+    <input type="number" id="time" class="mdc-text-field__input" value="500" aria-labelledby="my-label-id">
+    <span class="mdc-notched-outline">
+      <span class="mdc-notched-outline__leading"></span>
+      <span class="mdc-notched-outline__notch">
+        <span class="mdc-floating-label" id="my-label-id">维持时间间隔（毫秒）</span>
+      </span>
+      <span class="mdc-notched-outline__trailing"></span>
+    </span>
+    <button onclick="set500();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">0.5秒</span>
+    </button>
+    <button onclick="set5s();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">5秒</span>
+    </button>
+    <button onclick="set30s();" class="mdc-button foo-button">
+      <div class="mdc-button__ripple"></div>
+      <span class="mdc-button__label">半分钟</span>
+    </button>
+  </label>
+  <br>
+  <button onclick="tryLogin();testNet();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">发起一次登录</span>
+  </button>
+  <button onclick="fuckMode();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">启动强力维持</span>
+  </button>
+  <button onclick="checkMode();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">启动智能维持</span>
+  </button>
+  <button onclick="stopAndRefresh();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">停止维持服务</span>
+  </button>
+  <br>
+  <button onclick="saveAccountD();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存默认账号</span>
+  </button>
+  <button onclick="saveAccount1();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存额外账号1</span>
+  </button>
+  <button onclick="saveAccount2();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存额外账号2</span>
+  </button>
+  <button onclick="saveAccount3();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存额外账号3</span>
+  </button>
+  <br>
+  <button onclick="loadAccountD();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">读取默认账号</span>
+  </button>
+  <button onclick="loadAccount1();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">读取额外账号1</span>
+  </button>
+  <button onclick="loadAccount2();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">读取额外账号2</span>
+  </button>
+  <button onclick="loadAccount3();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">读取额外账号3</span>
+  </button>
+  <br>
+  <div id="newlog" style="overflow-y:scroll;height:30%;width:100%;user-select:text;">
+  </div>
+  <br>
+  <button onclick="saveLog();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">保存日志</span>
+  </button>
+  <button onclick="clearLog();" class="mdc-button foo-button">
+    <div class="mdc-button__ripple"></div>
+    <span class="mdc-button__label">清空日志</span>
+  </button>
+  <script>
+    var isShowWindow = true;
+    var gui = require('nw.gui');
+    var win = gui.Window.get();
+    var tray = new gui.Tray({
+      title: '清涟',
+      icon: 'www/icon.png'
+    });
+    tray.tooltip = "点击打开清涟";
+
+    win.on('close', function () {
+      this.hide();
+      isShowWindow = false;
+    })
+
+    //添加菜单
+    var menu = new gui.Menu();
+
+    menu.append(new gui.MenuItem({
+      type: 'normal',
+      label: '显示/隐藏',
+      click: function () {
+        if (isShowWindow) {
+          win.hide();
+          isShowWindow = false;
+        } else {
+          win.show();
+          isShowWindow = true;
+        }
+      }
+    }));
+
+    menu.append(new gui.MenuItem({
+      type: 'normal',
+      label: '退出',
+      click: function () {
+        win.close(true);
+      }
+    }));
+
+    tray.menu = menu;
+
+    tray.on('click', function () {
+      if (isShowWindow) {
+        win.hide();
+        isShowWindow = false;
+      } else {
+        win.show();
+        isShowWindow = true;
+      }
+    })
+    function addLog(logText) {
+      const logEle = document.createElement('P');
+      logEle.innerText = getCurrentTime() + logText;
+      document.getElementById('newlog').insertBefore(logEle, document.getElementById('newlog').firstChild)
+    }
+    function saveLog() {
+      var eleLink = document.createElement('a');
+      eleLink.download = "清涟" + getCurrentTime() + ".log";
+      eleLink.style.display = 'none';
+      // 字符内容转变成blob地址
+      var blob = new Blob([document.getElementById('newlog').innerText]);
+      eleLink.href = URL.createObjectURL(blob);
+      // 触发点击
+      document.body.appendChild(eleLink);
+      eleLink.click();
+      // 然后移除
+      document.body.removeChild(eleLink);
+
+    }
+    function clearLog() {
+      document.getElementById('newlog').innerHTML = "";
+    }
+    document.getElementById('tip').style.marginTop = (document.getElementById('top').clientHeight + 10) + "px";
+    document.getElementById('toolbar').style.height = (document.getElementById('title').clientHeight + 10) + "px";
+    var win = nw.Window.get();
+    window.mdc.autoInit();
+    for (i = 0; document.getElementsByClassName("mdc-button foo-button")[i]; i++) {
+      mdc.ripple.MDCRipple.attachTo(document.getElementsByClassName("mdc-button foo-button")[i]);
+    }
+    var storage = window.localStorage;
+    var loadAccountD = function () {
+      document.getElementById("type").value = storage.getItem("type");
+      document.getElementById("account").value = storage.getItem("account");
+      document.getElementById("password").value = storage.getItem("password");
+      addLog("从本地读取了默认账号");
+    }
+    var loadAccount1 = function () {
+      document.getElementById("type").value = storage.getItem("type1");
+      document.getElementById("account").value = storage.getItem("account1");
+      document.getElementById("password").value = storage.getItem("password1");
+      addLog("从本地读取了账号1");
+    }
+    var loadAccount2 = function () {
+      document.getElementById("type").value = storage.getItem("type2");
+      document.getElementById("account").value = storage.getItem("account2");
+      document.getElementById("password").value = storage.getItem("password2");
+      addLog("从本地读取了账号2");
+    }
+    var loadAccount3 = function () {
+      document.getElementById("type").value = storage.getItem("type3");
+      document.getElementById("account").value = storage.getItem("account3");
+      document.getElementById("password").value = storage.getItem("password3");
+      addLog("从本地读取了账号3");
+    }
+    loadAccountD();
+    var saveAccountD = function () {
+      storage.setItem("type", document.getElementById("type").value);
+      storage.setItem("account", document.getElementById("account").value);
+      storage.setItem("password", document.getElementById("password").value);
+      addLog("默认账号保存到本地");
+    }
+    var saveAccount1 = function () {
+      storage.setItem("type1", document.getElementById("type").value);
+      storage.setItem("account1", document.getElementById("account").value);
+      storage.setItem("password1", document.getElementById("password").value);
+      addLog("账号1保存到本地");
+    }
+    var saveAccount2 = function () {
+      storage.setItem("type2", document.getElementById("type").value);
+      storage.setItem("account2", document.getElementById("account").value);
+      storage.setItem("password2", document.getElementById("password").value);
+      addLog("账号2保存到本地");
+    }
+    var saveAccount3 = function () {
+      storage.setItem("type3", document.getElementById("type").value);
+      storage.setItem("account3", document.getElementById("account").value);
+      storage.setItem("password3", document.getElementById("password").value);
+      addLog("账号3保存到本地");
+    }
+    var tryLogin = function () {
+      params = {
+        domain: document.getElementById("type").value,
+        username: document.getElementById("account").value,
+        password: document.getElementById("password").value
+      };
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState == 4) {
+          addLog("登录请求被处理");
+        }
+      }
+      httpRequest.open('POST', 'http://10.10.100.180/api/portal/v1/login', true);
+      httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      httpRequest.send(JSON.stringify(params));
+      addLog("已发起登录请求");
+    }
+    function set500(){
+      document.getElementById("time").value=500;
+    }
+    function set5s(){
+      document.getElementById("time").value=5000;
+    }
+    function set30s(){
+      document.getElementById("time").value=30000;
+    }
+    function testNet() {
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = function check() {
+        if (httpRequest.readyState == 4) {
+          if (httpRequest.status == 204) {
+            addLog("网络已连通，登录成功");
+          } else {
+            addLog("网络未连接，登录失败");
+          }
+        }
+      }
+      httpRequest.open('GET', storage.getItem("checkurl"), true);
+      httpRequest.send(null);
+      addLog("正在检测网络连通性");
+    }
+    var keep = false;
+    var fuckMode = function () {
+      setTimeout(fuckInterval, document.getElementById("time").value);
+      addLog("强力维持服务已经启动");
+      keep = true;
+    }
+    function fuckInterval() {
+      if (keep == true) {
+        tryLogin();
+        setTimeout(fuckInterval, document.getElementById("time").value);
+      } else {
+        addLog("强力维持服务已经停止");
+      }
+    }
+    var checkMode = function () {
+      setTimeout(checkInterval, document.getElementById("time").value)
+      addLog("智能维持服务已经启动");
+      keep = true;
+    }
+    function checkInterval() {
+      if (keep == true) {
+        testAndLogin();
+        setTimeout(checkInterval, document.getElementById("time").value);
+      } else {
+        addLog("智能维持服务已经停止");
+      }
+    }
+    function testAndLogin() {
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = function check() {
+        if (httpRequest.readyState == 4) {
+          if (httpRequest.status == 204) {
+            addLog("网络已连通，无需处理");
+          } else {
+            addLog("网络未连接，正在发起登录");
+            tryLogin();
+          }
+        }
+      }
+      httpRequest.open('GET', storage.getItem("checkurl"), true);
+      httpRequest.send(null);
+      addLog("正在检测网络连通性");
+    }
+    var stopAndRefresh = function () {
+      if (keep == true) {
+        keep = false;
+        addLog("正在停止维持服务");
+      } else {
+        alert("你不能停止一个不存在的东西");
+      }
+    };
+    var Tray = function () {
+      win.hide();
+      isShowWindow = false;
+    }
+    var Shut = function () {
+      win.close(true);
+    }
+    function openSettings() {
+      nw.Window.open("www/settings.html", {
+        focus: true,
+        "width": 540,
+        "height": 894,
+        "resizable": false,
+        "icon": "www/icon.png",
+        "frame": false,
+        "position": "center",
+        "kiosk": false,
+        "transparent": false
+      })
+    }
+    function getCurrentTime() {
+      var date = new Date();//当前时间
+      var month = zeroFill(date.getMonth() + 1);//月
+      var day = zeroFill(date.getDate());//日
+      var hour = zeroFill(date.getHours());//时
+      var minute = zeroFill(date.getMinutes());//分
+      var second = zeroFill(date.getSeconds());//秒
+
+      //当前时间
+      var curTime = month + "-" + day
+        + " " + hour + ":" + minute + ":" + second;
+
+      return curTime;
+    }
+    function zeroFill(i) {
+      if (i >= 0 && i <= 9) {
+        return "0" + i;
+      } else {
+        return i;
+      }
+    }
+  </script>
+</body>
+
+</html>
